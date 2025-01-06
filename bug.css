@@ -1,0 +1,13 @@
+The following CSS code snippet exhibits an unusual behavior when attempting to target elements within nested shadow DOM environments:
+
+```css
+div {
+  --custom-property: 10px;
+}
+
+:host-context(div) >>> .inner-element {
+  margin: var(--custom-property);
+}
+```
+
+The `>>>` combinator, while effective for penetrating shadow boundaries in older versions of Chrome, has been deprecated.  Its behavior can be inconsistent and may not work as expected across different browsers and shadow DOM implementations. 
