@@ -1,0 +1,33 @@
+A more reliable approach involves utilizing the `::part` pseudo-element (if applicable within your component structure) or properly passing CSS variables through the shadow DOM boundary.
+
+**Using ::part:**
+
+```css
+div {
+  --custom-property: 10px;
+}
+
+.outer-element {
+  --custom-property: 20px; /*Override if needed*/
+}
+
+:host-context(.outer-element) .inner-element::part(inner) {
+  margin: var(--custom-property);
+}
+```
+
+**Passing Variables Properly:**
+
+```css
+/*In your component's CSS*/
+.inner-element {
+  margin: var(--my-margin);
+}
+
+/*In your main stylesheet*/
+:host-context(div) {
+  --my-margin: 10px;
+}
+```
+
+This approach ensures consistent styling by explicitly passing and declaring CSS variables, thus avoiding the unpredictable behavior of the deprecated `>>>` combinator.
